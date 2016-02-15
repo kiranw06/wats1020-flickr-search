@@ -15,8 +15,6 @@ $(document).on('ready', function(){
 
         // 1.   Accept a string value called `tags` as an argument.
         var searchPhotos = function(tags){
-          
-       // 
             // 2.   Define the location of the Flickr API like this:
             var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
             // 3.   Construct a `$.getJSON()` call where you send a request object
@@ -31,14 +29,10 @@ $(document).on('ready', function(){
                 $('#images').empty();
                 $.each( data.items, function( i, item ) {
                   var newListItem = $('<li>')
-                  //// If you're not doing the modal, then show info about the image.
-                  //var newDescription = $('<p class="image-description">').html(item.description).appendTo(newListItem);
-                  //var newTitle = $('<p class="image-title"><br>').html(item.title).appendTo(newListItem);
-                  //var newLink = $('<a>').attr('href', item.link).text('View on Flickr.').appendTo(newListItem);
-                  var newDate = $('<p class="image-date"><br>').text(item.date_taken).appendTo(newListItem);
-                  $( '<img class="img-thumbnail" class="img-responsive"><br>' ).attr("src" , item.media.m ).appendTo(newListItem);
-                  
-                  var newButton = $("<button class='btn btn-sm btn-primary'>enlarge</button>").attr({
+                  var newDate = $('<p class="image-date"><br>').text(item.date_taken).appendTo(newListItem);    //  Adds date of image outside of the modal 
+                  $( '<img class="img-thumbnail" class="img-responsive"><br>' ).attr("src" , item.media.m ).appendTo(newListItem);    //  Adds the image element
+                  var newButton = $("<button class='btn btn-sm btn-primary'>enlarge</button>").attr({           //  Adds the modal button 
+                    //  Adds image information inside of the modal display
                     'data-title': item.title,
                     'data-toggle': "modal",
                     'data-target': "#infoModal",
@@ -46,18 +40,14 @@ $(document).on('ready', function(){
                     'data-description': item.description,
                     'type': "button"
                   }).appendTo(newListItem);
-                  newListItem.appendTo( "#images" );
+                  newListItem.appendTo( "#images" );    // 4.   Update the display to add the images to the list with the id `#images`.
                   if ( i === 20 ) {
                     return false;
                   }
                 });
               });
 };
-        // 4.   Update the display to add the images to the list with the id
-        //      `#images`.
         
-
-
     // Attach an event to the search button (`button.search`) to execute the
     // search when clicked.
     $ ('button.search').on('click', function(event) {
@@ -74,13 +64,15 @@ $(document).on('ready', function(){
         //      user.
         searchPhotos(tags);
     });
+  
+  // STRETCH GOAL: Add a "more info" popup using the technique shown on the
+  // Bootstrap Modal documentation: http://getbootstrap.com/javascript/#modals-related-target
 
   $('#infoModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); // Button that triggered the modal
     var title = button.data('title'); // Extract info from data-* attributes
     var imgSrc = button.data('imgsrc');
     var imageDescription = button.data('description');
-
     // Update the modal's content. We'll use jQuery here.
     var modal = $(this);
     modal.find('.modal-title').html(title);
@@ -88,9 +80,4 @@ $(document).on('ready', function(){
     modalBody.empty();
     var modalDescription = $("<p class='image-description'>").html(imageDescription).appendTo(modalBody);
   });
-        
-    // STRETCH GOAL: Add a "more info" popup using the technique shown on the
-    // Bootstrap Modal documentation: http://getbootstrap.com/javascript/#modals-related-target
-
-
 });
