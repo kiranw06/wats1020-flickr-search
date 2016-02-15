@@ -2,10 +2,10 @@
    Author's custom styles
    ========================================================================== */
 
-/* Enable these styles if you wish to go into a grid layout.
 ul#images li {
-    width: 120px;
-    height: auto;
+    width: 200px;
+    height: 300px;
+    margin: 40px;
     display: inline-block;
     position: relative;
     float: left;
@@ -13,15 +13,17 @@ ul#images li {
 
 ul#images li img {
     display: inline-block;
-    width: 100%;
-    height: auto;
+    margin: 25px;
+    max-height: 200px;
 }
 
 ul#images li button {
     display: inline-block;
+    margin-left: 25px;
 }
-
---- End of grid layout styles. */
+.image-date {
+  margin-left: 25px;
+}
 
 ul#images {
     list-style-type: none;
