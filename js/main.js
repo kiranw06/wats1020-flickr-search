@@ -27,13 +27,16 @@ $(document).on('ready', function(){
             })
               .done(function( data ) {
                 $('#images').empty();
-                $.each( data.items, function( i, item ) {
-                  var newListItem = $('<li>')
-                  var newDate = $('<p class="image-date"><br>').text(item.date_taken).appendTo(newListItem);    //  Adds date of image outside of the modal 
-                  $( '<img class="img-thumbnail" class="img-responsive"><br>' ).attr("src" , item.media.m ).appendTo(newListItem);    //  Adds the image element
-                  var newButton = $("<button class='btn btn-sm btn-primary'>enlarge</button>").attr({           //  Adds the modal button 
+                $.each( data.items, function( i, item ) { 
+                  //  Adds new list item for photo 
+                  var newListItem = $('<li>');                                                                      
+                  //  List item content 
+                  $('<img class="img-thumbnail" class="img-responsive"><br>').attr("src" , item.media.m ).appendTo(newListItem);   //  Adds the image element
+                  var newDate = $('<p class="image-date" class="text-muted">').text(item.date_taken).appendTo(newListItem);        //  Adds date of image
+                  var newLink = $('<a>').attr('href', item.link).text('View on Flickr.').appendTo(newListItem);                    //  Adds flickr link
+                  var newButton = $("<button class='btn btn-sm btn-primary'>More</button>").attr({                                 //  Adds the modal button 
                     //  Adds image information inside of the modal display
-                    'data-title': item.title,
+                    'data-title': item.title,                                                                                      //  Adds image title
                     'data-toggle': "modal",
                     'data-target': "#infoModal",
                     'data-imgsrc': item.media.m,

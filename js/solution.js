@@ -29,7 +29,7 @@ $(document).on('ready', function(){
         var newLink = $('<a>').attr('href', item.link).text('View on Flickr.').appendTo(newListItem);
 
         // Button only needed if you're doing the modal
-        var newButton = $("<button class='btn btn-sm btn-primary'>enlarge</button>").attr({
+        var newButton = $("<button class='btn btn-sm btn-primary'>More</button>").attr({
           'data-title': item.title,
           'data-toggle': "modal",
           'data-target': "#infoModal",
